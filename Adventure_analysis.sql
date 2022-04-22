@@ -50,3 +50,17 @@ WHERE B.[SalesAmount] Is NOT NULL
 GROUP BY A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
 ORDER BY internetRevenue,resellerRevenue
+
+--List Revenue by Product Category
+SELECT D.EnglishProductCategoryName AS CategoryName
+	,SUM(B.[SalesAmount]) AS Revenue
+FROM [dbo].[DimProduct] A
+LEFT JOIN [dbo].[FactInternetSales] B
+ON A.ProductKey=B.ProductKey
+LEFT JOIN [dbo].[DimProductSubcategory] C
+ON A.ProductSubcategoryKey=C.ProductSubcategoryKey
+LEFT JOIN [dbo].[DimProductCategory] D
+ON C.ProductCategoryKey=D.ProductCategoryKey
+WHERE B.[SalesAmount] Is NOT NULL
+GROUP BY D.EnglishProductCategoryName
+ORDER BY Revenue DESC
