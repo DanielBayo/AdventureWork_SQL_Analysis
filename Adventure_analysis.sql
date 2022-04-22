@@ -51,16 +51,18 @@ GROUP BY A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
 ORDER BY internetRevenue,resellerRevenue
 
---List Revenue by Product Category
-SELECT D.EnglishProductCategoryName AS CategoryName
+--List Revenue by Product Category for both Internet and Reseller Sales
+SELECT E.EnglishProductCategoryName AS CategoryName
 	,SUM(B.[SalesAmount]) AS Revenue
 FROM [dbo].[DimProduct] A
 LEFT JOIN [dbo].[FactInternetSales] B
 ON A.ProductKey=B.ProductKey
-LEFT JOIN [dbo].[DimProductSubcategory] C
-ON A.ProductSubcategoryKey=C.ProductSubcategoryKey
-LEFT JOIN [dbo].[DimProductCategory] D
-ON C.ProductCategoryKey=D.ProductCategoryKey
+LEFT JOIN [dbo].[FactResellerSales] C
+ON B.ProductKey=C.ProductKey
+LEFT JOIN [dbo].[DimProductSubcategory] D
+ON A.ProductSubcategoryKey=D.ProductSubcategoryKey
+LEFT JOIN [dbo].[DimProductCategory] E
+ON D.ProductCategoryKey=E.ProductCategoryKey
 WHERE B.[SalesAmount] Is NOT NULL
-GROUP BY D.EnglishProductCategoryName
+GROUP BY E.EnglishProductCategoryName
 ORDER BY Revenue DESC
