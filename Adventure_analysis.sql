@@ -35,3 +35,18 @@ WHERE B.[SalesAmount] Is NOT NULL
 GROUP BY A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
 ORDER BY Revenue DESC
+
+--List the Revenue by Location(Country) for Internet Sales and Reseller Sales on separate columns
+SELECT A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]	
+	,SUM(B.[SalesAmount]) AS internetRevenue
+	,SUM(C.[SalesAmount]) AS resellerRevenue
+FROM [dbo].[DimSalesTerritory] A 
+LEFT JOIN [dbo].[FactInternetSales] B
+ON A.SalesTerritoryKey=B.SalesTerritoryKey
+LEFT JOIN [dbo].[FactResellerSales] C
+ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE B.[SalesAmount] Is NOT NULL
+GROUP BY A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]
+ORDER BY internetRevenue,resellerRevenue
