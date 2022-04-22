@@ -78,3 +78,15 @@ ON B.ProductKey=C.ProductKey
 WHERE B.[SalesAmount] Is NOT NULL
 GROUP BY A.EnglishProductName
 ORDER BY Revenue DESC
+
+--List Bottom 10 Product by Revenue for both Internet and Reseller Sales
+SELECT TOP 10 A.EnglishProductName AS Product
+	,SUM(B.[SalesAmount]) AS Revenue
+FROM [dbo].[DimProduct] A
+LEFT JOIN [dbo].[FactInternetSales] B
+ON A.ProductKey=B.ProductKey
+LEFT JOIN [dbo].[FactResellerSales] C
+ON B.ProductKey=C.ProductKey
+WHERE B.[SalesAmount] Is NOT NULL
+GROUP BY A.EnglishProductName
+ORDER BY Revenue ASC
