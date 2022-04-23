@@ -5,9 +5,12 @@ SELECT
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimSalesTerritory] A LEFT JOIN [dbo].[FactInternetSales] B
-ON A.SalesTerritoryKey=B.SalesTerritoryKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
@@ -19,9 +22,12 @@ SELECT
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimSalesTerritory] A LEFT JOIN [dbo].[FactResellerSales] B
-ON A.SalesTerritoryKey=B.SalesTerritoryKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactResellerSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
@@ -33,12 +39,14 @@ SELECT
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimSalesTerritory] A 
-LEFT JOIN [dbo].[FactInternetSales] B
-ON A.SalesTerritoryKey=B.SalesTerritoryKey
-LEFT JOIN [dbo].[FactResellerSales] C
-ON B.SalesTerritoryKey=C.SalesTerritoryKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
@@ -51,12 +59,14 @@ SELECT
 	,A.[SalesTerritoryGroup]	
 	,SUM(B.[SalesAmount]) AS internetRevenue
 	,SUM(C.[SalesAmount]) AS resellerRevenue
-FROM [dbo].[DimSalesTerritory] A 
-LEFT JOIN [dbo].[FactInternetSales] B
-ON A.SalesTerritoryKey=B.SalesTerritoryKey
-LEFT JOIN [dbo].[FactResellerSales] C
-ON B.SalesTerritoryKey=C.SalesTerritoryKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
@@ -68,16 +78,18 @@ ORDER BY
 SELECT 
 	E.EnglishProductCategoryName AS CategoryName
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimProduct] A
-LEFT JOIN [dbo].[FactInternetSales] B
-ON A.ProductKey=B.ProductKey
-LEFT JOIN [dbo].[FactResellerSales] C
-ON B.ProductKey=C.ProductKey
-LEFT JOIN [dbo].[DimProductSubcategory] D
-ON A.ProductSubcategoryKey=D.ProductSubcategoryKey
-LEFT JOIN [dbo].[DimProductCategory] E
-ON D.ProductCategoryKey=E.ProductCategoryKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimProduct] A
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.ProductKey=B.ProductKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.ProductKey=C.ProductKey
+	LEFT JOIN [dbo].[DimProductSubcategory] D
+		ON A.ProductSubcategoryKey=D.ProductSubcategoryKey
+	LEFT JOIN [dbo].[DimProductCategory] E
+		ON D.ProductCategoryKey=E.ProductCategoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	E.EnglishProductCategoryName
 ORDER BY 
@@ -87,12 +99,14 @@ ORDER BY
 SELECT TOP 10 
 	A.EnglishProductName AS Product
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimProduct] A
-LEFT JOIN [dbo].[FactInternetSales] B
-ON A.ProductKey=B.ProductKey
-LEFT JOIN [dbo].[FactResellerSales] C
-ON B.ProductKey=C.ProductKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimProduct] A
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.ProductKey=B.ProductKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.ProductKey=C.ProductKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.EnglishProductName
 ORDER BY 
@@ -102,12 +116,14 @@ ORDER BY
 SELECT TOP 10 
 	A.EnglishProductName AS Product
 	,SUM(B.[SalesAmount]) AS Revenue
-FROM [dbo].[DimProduct] A
-LEFT JOIN [dbo].[FactInternetSales] B
-ON A.ProductKey=B.ProductKey
-LEFT JOIN [dbo].[FactResellerSales] C
-ON B.ProductKey=C.ProductKey
-WHERE B.[SalesAmount] Is NOT NULL
+FROM 
+	[dbo].[DimProduct] A
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.ProductKey=B.ProductKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.ProductKey=C.ProductKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
 GROUP BY 
 	A.EnglishProductName
 ORDER BY 
@@ -119,12 +135,14 @@ SELECT
 	,A.EmailAddress
 	,C.SalesTerritoryCountry
 	,SUM(B.SalesAmount) AS Revenue
-FROM [dbo].[DimEmployee] A
-LEFT JOIN [dbo].[FactResellerSales] B
-ON A.EmployeeKey=B.EmployeeKey
-LEFT JOIN [dbo].[DimSalesTerritory] C
-ON B.SalesTerritoryKey=C.SalesTerritoryKey
-WHERE Title LIKE 'Sales Representative'
+FROM 
+	[dbo].[DimEmployee] A
+	LEFT JOIN [dbo].[FactResellerSales] B
+		ON A.EmployeeKey=B.EmployeeKey
+	LEFT JOIN [dbo].[DimSalesTerritory] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	Title LIKE 'Sales Representative'
 GROUP BY 
 	CONCAT(A.FirstName,' ',A.LastName)
 	,A.EmailAddress
