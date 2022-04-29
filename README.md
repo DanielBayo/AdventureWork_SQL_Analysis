@@ -18,9 +18,8 @@
 
 ```sql
 SELECT 
-	A.[SalesTerritoryCountry]
-	,A.[SalesTerritoryGroup]	
-	,SUM(B.[SalesAmount]) AS Revenue
+	ISNULL(A.[SalesTerritoryCountry],'TOTAL') AS Country
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
 FROM 
 	[dbo].[DimSalesTerritory] A 
 	LEFT JOIN [dbo].[FactInternetSales] B
@@ -28,11 +27,22 @@ FROM
 WHERE 
 	B.[SalesAmount] Is NOT NULL
 GROUP BY 
-	A.[SalesTerritoryCountry]
-	,A.[SalesTerritoryGroup]
-ORDER BY 
-	Revenue DESC;
+	A.[SalesTerritoryCountry] WITH ROLLUP
+ORDER BY          /* Order by the country and have the group total at the bottom*/
+	CASE 
+		WHEN SalesTerritoryCountry IS NULL THEN 1
+		ELSE 0
+	END
+	ASC, country ASC;
 ```
-
+|Country|Revenu|"
+|--|--|
+|Australia|$9,061,000.58|
+|Canada|$1,977,844.86|
+|France|$2,644,017.71|
+|Germany|$2,894,312.34|
+|United Kingdom|$3,391,712.21|
+|United States|$9,389,789.51|
+|TOTAL|$29,358,677.22|
 
 This is an Analysis of the AdventureWork Database in Microsoft SQL Server DataBase
