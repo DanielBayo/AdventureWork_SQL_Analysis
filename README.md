@@ -16,7 +16,7 @@
 
 **The query:**
 
-'''sql
+```sql
 SELECT 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
@@ -32,7 +32,7 @@ GROUP BY
 	,A.[SalesTerritoryGroup]
 ORDER BY 
 	Revenue DESC;
-'''
+```
 
 
 This is an Analysis of the AdventureWork Database in Microsoft SQL Server DataBase
