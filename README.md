@@ -91,4 +91,8 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 |United States|$53,607,801.21|
 |TOTAL|$80,450,596.98|
 
+**The Visual:**
+
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q2.PNG" alt="Reseller Sales by Country" width="500"/>
+
 This is an Analysis of the AdventureWork Database in Microsoft SQL Server DataBase
