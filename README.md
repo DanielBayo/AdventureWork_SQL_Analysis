@@ -35,8 +35,8 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 	END
 	ASC, country ASC;
 ```
-|Country|Revenu|"
-|--|--|
+|Country|Revenue|
+|-------|:-------:|
 |Australia|$9,061,000.58|
 |Canada|$1,977,844.86|
 |France|$2,644,017.71|
