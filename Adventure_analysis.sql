@@ -2,8 +2,9 @@
 USE [AdventureWorksDW2019]
 --List the Revenue by Location(Country) for Internet Sales Only
 SELECT 
-	ISNULL(A.[SalesTerritoryCountry],'TOTAL') AS Country
-	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+	A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]	
+	,SUM(B.[SalesAmount]) AS Revenue
 FROM 
 	[dbo].[DimSalesTerritory] A 
 	LEFT JOIN [dbo].[FactInternetSales] B
@@ -11,13 +12,10 @@ FROM
 WHERE 
 	B.[SalesAmount] Is NOT NULL
 GROUP BY 
-	A.[SalesTerritoryCountry] WITH ROLLUP
-ORDER BY          /* Order by the country and have the group total at the bottom*/
-	CASE 
-		WHEN SalesTerritoryCountry IS NULL THEN 1
-		ELSE 0
-	END
-	ASC, country ASC
+	A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]
+ORDER BY 
+	Revenue DESC
 
 --List the Revenue by Location(Country) for Reseller Only
 SELECT 
