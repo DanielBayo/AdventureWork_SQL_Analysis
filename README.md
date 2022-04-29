@@ -54,7 +54,7 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 
 **The Visual:**
 
-<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q1.JPG" alt="Internet Sales by Country" width="400"/>
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q1.JPG" alt="Internet Sales by Country" width="500"/>
 
 ### 2. What is the Total Revenue by Location(Country) for Reseller Only?
 
