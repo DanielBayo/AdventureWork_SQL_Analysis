@@ -42,7 +42,7 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 SELECT 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
-	,SUM(B.[SalesAmount]) AS Revenue
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
 FROM 
 	[dbo].[DimSalesTerritory] A 
 	LEFT JOIN [dbo].[FactInternetSales] B
