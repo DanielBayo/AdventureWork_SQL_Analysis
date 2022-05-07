@@ -233,7 +233,7 @@ ORDER BY
 ```
 
 **The Result Set:**
-|CategoryName|Revenue|
+|Product|Revenue|
 |-------|-------|
 |Touring-1000 Yellow, 60|$97,794,551.40|
 |Touring-3000 Yellow, 62|$9,984,607.50|
@@ -249,3 +249,39 @@ ORDER BY
 **The Visual:**
 
 <img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q6.png" alt="Top 10 Product by revenue" width="500"/>
+
+### 6. What are the Bottom 10 Product by Revenue?
+
+**The query:**
+
+```sql
+SELECT TOP 10 
+	A.EnglishProductName AS Product
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+FROM 
+	[dbo].[DimProduct] A
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.ProductKey=B.ProductKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.ProductKey=C.ProductKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
+GROUP BY 
+	A.EnglishProductName
+ORDER BY 
+	Revenue ASC;
+```
+
+**The Result Set:**
+|Product|Revenue|
+|-------|-------|
+|Patch Kit/8 Patches|$1,191,104.57|
+|Half-Finger Gloves, L|$1,442,926.31|
+|Mountain-400-W Silver, 42|$10,124,949.42|
+|Long-Sleeve Logo Jersey, L|$10,190,561.48|
+|Mountain-400-W Silver, 46|$10,725,151.62|
+|Short-Sleeve Classic Jersey, XL|$10,930,545.45|
+|Touring-1000 Blue, 60|$102,333,820.68|
+|Touring-1000 Yellow, 46|$109,896,090.72|
+|Touring-3000 Yellow, 44|$11,343,850.35|
+|Road-650 Black, 60|$11,532,659.65|
