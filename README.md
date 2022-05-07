@@ -54,7 +54,7 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 
 **The Visual:**
 
-<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q1.PNG" alt="Internet Sales by Country" width="500"/>
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q1.PNG" alt="Internet Sales Revenue by Country" width="500"/>
 
 ### 2. What is the Total Revenue by Location(Country) for Reseller Only?
 
@@ -93,6 +93,42 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 
 **The Visual:**
 
-<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q2.PNG" alt="Reseller Sales by Country" width="500"/>
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q2.PNG" alt="Reseller Sales Revenue by Country" width="500"/>
 
-This is an Analysis of the AdventureWork Database in Microsoft SQL Server DataBase
+### 2. What is the Total Revenue by Location(Country and Continent) for Internet Sales and Reseller Sales?
+
+**The query:**
+
+```sql
+SELECT 
+	A.[SalesTerritoryCountry] AS Country
+	,A.[SalesTerritoryGroup] AS Continent	
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
+GROUP BY 
+	A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]
+ORDER BY 
+	Revenue DESC;
+```
+
+**The Result Set:**
+|Country|Continent|Revenue|
+|-------|-------|:-------:|
+|France|Europe|$9,333,382,531.48|
+|Germany|Europe|$5,322,640,389.95|
+|Canada|North America|$22,634,456,601.87|
+|Australia|Pacific|$15,521,494,001.08|
+|United Kingdom|Europe|$11,938,826,982.37|
+|United States|North America|$105,362,939,186.95|
+
+**The Visual:**
+
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q3.PNG" alt="Total Revenue by Country" width="500"/>
