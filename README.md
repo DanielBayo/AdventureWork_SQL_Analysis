@@ -172,3 +172,40 @@ France|Europe|$9,333,382,531.48|$25,608,695,842.73|
 **The Visual:**
 
 <img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q4.PNG" alt="Revenue by Country with Reseller and Internet sales in separate column" width="500"/>
+
+### 5. What is the Total Revenue by Product Category for Internet Sales and Reseller Sales (in separate columns)?
+
+**The query:**
+
+```sql
+SELECT 
+	E.EnglishProductCategoryName AS CategoryName
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+FROM 
+	[dbo].[DimProduct] A
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.ProductKey=B.ProductKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.ProductKey=C.ProductKey
+	LEFT JOIN [dbo].[DimProductSubcategory] D
+		ON A.ProductSubcategoryKey=D.ProductSubcategoryKey
+	LEFT JOIN [dbo].[DimProductCategory] E
+		ON D.ProductCategoryKey=E.ProductCategoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
+GROUP BY 
+	E.EnglishProductCategoryName
+ORDER BY 
+	Revenue DESC;
+```
+
+**The Result Set:**
+|CategoryName|Revenue|
+|-------|-------|
+|Bikes|$5,514,174,492.66|
+|Accessories|$128,262,539.07|
+|Clothing|$101,053,213.75|
+
+**The Visual:**
+
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q5.png" alt="Revenue by Category" width="500"/>
