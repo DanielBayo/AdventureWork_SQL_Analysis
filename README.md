@@ -95,7 +95,7 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 
 <img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q2.PNG" alt="Reseller Sales Revenue by Country" width="500"/>
 
-### 2. What is the Total Revenue by Location(Country and Continent) for Internet Sales and Reseller Sales?
+### 3. What is the Total Revenue by Location(Country and Continent) for Internet Sales and Reseller Sales?
 
 **The query:**
 
@@ -132,3 +132,43 @@ ORDER BY
 **The Visual:**
 
 <img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q3.png" alt="Total Revenue by Country" width="500"/>
+
+### 4. What is the Total Revenue by Location(Country and Continent) for Internet Sales and Reseller Sales (in separate columns)?
+
+**The query:**
+
+```sql
+SELECT 
+	A.[SalesTerritoryCountry] AS Country
+	,A.[SalesTerritoryGroup] AS Continent
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS internetRevenue
+	,FORMAT(SUM(C.[SalesAmount]),'$#,0.00') AS resellerRevenue
+FROM 
+	[dbo].[DimSalesTerritory] A 
+	LEFT JOIN [dbo].[FactInternetSales] B
+		ON A.SalesTerritoryKey=B.SalesTerritoryKey
+	LEFT JOIN [dbo].[FactResellerSales] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	B.[SalesAmount] Is NOT NULL
+GROUP BY 
+	A.[SalesTerritoryCountry]
+	,A.[SalesTerritoryGroup]
+ORDER BY 
+	internetRevenue DESC
+	,resellerRevenue DESC;
+```
+
+**The Result Set:**
+|Country|Continent|internetRevenue|resellerRevenue|
+|-------|-------|-------|-------|
+France|Europe|$9,333,382,531.48|$25,608,695,842.73|
+|Germany|Europe|$5,322,640,389.95|$11,159,932,709.81|
+|Canada|North America|$22,634,456,601.87|$109,559,793,045.33|
+|Australia|Pacific|$15,521,494,001.08|$21,276,405,602.06|
+|United Kingdom|Europe|$11,938,826,982.37|$29,550,834,956.50|
+|United States|North America|$105,362,939,186.95|$338,971,891,689.64|
+
+**The Visual:**
+
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q4.PNG" alt="Revenue by Country with Reseller and Internet sales in separate column" width="500"/>
