@@ -38,10 +38,10 @@ ORDER BY          /* Order by the country and have the group total at the bottom
 	END
 	ASC, country ASC;
 
---List the Revenue by Location(Country) for Internet Sales and Reseller Sales
+--List the Revenue by Location(Country and continent) for Internet Sales and Reseller Sales
 SELECT 
-	A.[SalesTerritoryCountry]
-	,A.[SalesTerritoryGroup]	
+	A.[SalesTerritoryCountry] AS Country
+	,A.[SalesTerritoryGroup] AS Continent
 	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
 FROM 
 	[dbo].[DimSalesTerritory] A 
@@ -55,14 +55,14 @@ GROUP BY
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]
 ORDER BY 
-	Revenue DESC
+	Revenue DESC;
 
 --List the Revenue by Location(Country) for Internet Sales and Reseller Sales on separate columns
 SELECT 
 	A.[SalesTerritoryCountry]
 	,A.[SalesTerritoryGroup]	
-	,SUM(B.[SalesAmount]) AS internetRevenue
-	,SUM(C.[SalesAmount]) AS resellerRevenue
+	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS internetRevenue
+	,FORMAT(SUM(C.[SalesAmount]),'$#,0.00') AS resellerRevenue
 FROM 
 	[dbo].[DimSalesTerritory] A 
 	LEFT JOIN [dbo].[FactInternetSales] B
@@ -76,7 +76,7 @@ GROUP BY
 	,A.[SalesTerritoryGroup]
 ORDER BY 
 	internetRevenue DESC
-	,resellerRevenue DESC
+	,resellerRevenue DESC;
 
 --List Revenue by Product Category for both Internet and Reseller Sales
 SELECT 
