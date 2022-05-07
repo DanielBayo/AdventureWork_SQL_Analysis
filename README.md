@@ -131,4 +131,4 @@ ORDER BY
 
 **The Visual:**
 
-<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q3.PNG" alt="Total Revenue by Country" width="500"/>
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q3.png" alt="Total Revenue by Country" width="500"/>
