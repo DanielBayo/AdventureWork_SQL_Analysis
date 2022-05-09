@@ -322,12 +322,12 @@ ORDER BY
 |Jae Pak|	jae0@adventure-works.com|	Canada|	$8,503,338.6472|
 |Tsvi Reiter|	tsvi0@adventure-works.com|	United States|	$7,171,012.7514|
 |Shu Ito	|shu0@adventure-works.com|	United States|	$6,427,005.5556|
-|Ranjit Varkey Chudukatil|	ranjit0@adventure-works.com	France|	$4,509,888.933|
+|Ranjit Varkey Chudukatil|	ranjit0@adventure-works.com|	France|	$4,509,888.933|
 |José Saraiva|	josé1@adventure-works.com|	United Kingdom|	$3,837,927.1902|
 |David Campbell|	david8@adventure-works.com|	United States|	$3,729,945.3501|
 |Garrett Vargas|	garrett1@adventure-works.com|	Canada|	$3,609,447.2163|
 |Pamela Ansman-Wolfe|	pamela0@adventure-works.com|	United States|	$3,325,102.5952|
 |Tete Mensa-Annan|	tete0@adventure-works.com|	United States|	$2,312,545.6905|
-|José Saraiva|	josé1@adventure-works.com|	Canada|	$2,088,491.1672
+|José Saraiva|	josé1@adventure-works.com|	Canada|	$2,088,491.1672|
 |Rachel Valdez|	rachel0@adventure-works.com|	Germany|	$1,790,640.2311|
 |Lynn Tsoflias|	lynn0@adventure-works.com|	Australia|	$1,421,810.9252|
