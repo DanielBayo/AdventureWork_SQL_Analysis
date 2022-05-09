@@ -217,7 +217,7 @@ ORDER BY
 ```sql
 SELECT TOP 10 
 	A.EnglishProductName AS Product
-	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+	,SUM(B.[SalesAmount]) AS Revenue
 FROM 
 	[dbo].[DimProduct] A
 	LEFT JOIN [dbo].[FactInternetSales] B
@@ -235,16 +235,16 @@ ORDER BY
 **The Result Set:**
 |Product|Revenue|
 |-------|-------|
-|Touring-1000 Yellow, 60|$97,794,551.40|
-|Touring-3000 Yellow, 62|$9,984,607.50|
-|Touring-3000 Yellow, 50|$9,679,501.65|
-|Road-650 Black, 44|$9,554,435.43|
-|Road Tire Tube|$9,480.24|
-|Water Bottle - 30 oz.|$9,402,836.64|
-|Road-650 Red, 52|$9,303,822.70|
-|Touring-3000 Blue, 54|$9,227,410.50|
-|Touring-3000 Blue, 50|$9,193,262.40|
-|AWC Logo Cap|$9,056,526.00|
+|Mountain-200 Black, 38|	$428,863,632.9916|
+|Mountain-200 Black, 42|	$361,345,273.0446|
+|Mountain-200 Silver, 38|	$314,967,971.7216|
+|Mountain-200 Black, 46|	$298,453,039.435|
+|Mountain-200 Silver, 46|	$286,538,979.9384|
+|Mountain-200 Silver, 42|	$283,256,857.0944|
+|Road-150 Red, 56|	$190,006,137.00|
+|Road-150 Red, 62|	$161,108,028.48|
+|Road-250 Black, 48|	$142,851,679.425|
+|Road-350-W Yellow, 40|	$136,831,037.58|
 
 **The Visual:**
 
@@ -257,7 +257,7 @@ ORDER BY
 ```sql
 SELECT TOP 10 
 	A.EnglishProductName AS Product
-	,FORMAT(SUM(B.[SalesAmount]),'$#,0.00') AS Revenue
+	,SUM(B.[SalesAmount]) AS Revenue
 FROM 
 	[dbo].[DimProduct] A
 	LEFT JOIN [dbo].[FactInternetSales] B
@@ -275,13 +275,13 @@ ORDER BY
 **The Result Set:**
 |Product|Revenue|
 |-------|-------|
-|Patch Kit/8 Patches|$1,191,104.57|
-|Half-Finger Gloves, L|$1,442,926.31|
-|Mountain-400-W Silver, 42|$10,124,949.42|
-|Long-Sleeve Logo Jersey, L|$10,190,561.48|
-|Mountain-400-W Silver, 46|$10,725,151.62|
-|Short-Sleeve Classic Jersey, XL|$10,930,545.45|
-|Touring-1000 Blue, 60|$102,333,820.68|
-|Touring-1000 Yellow, 46|$109,896,090.72|
-|Touring-3000 Yellow, 44|$11,343,850.35|
-|Road-650 Black, 60|$11,532,659.65|
+|Touring Tire Tube	|$7425.12|
+|Road Tire Tube	|$9480.24|
+|Road Bottle Cage	|$15390.88|
+|Mountain Tire Tube	|$15444.05|
+|Mountain Bottle Cage	|$20229.75|
+|Long-Sleeve Logo Jersey, S	|$21445.71|
+|LL Mountain Tire	|$21541.38|
+|Short-Sleeve Classic Jersey, M|$21973.93|
+|LL Road Tire	|$22435.56|
+|ML Road Tire	|$23140.74|
