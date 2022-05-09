@@ -275,13 +275,59 @@ ORDER BY
 **The Result Set:**
 |Product|Revenue|
 |-------|-------|
-|Touring Tire Tube	|$7425.12|
-|Road Tire Tube	|$9480.24|
-|Road Bottle Cage	|$15390.88|
-|Mountain Tire Tube	|$15444.05|
-|Mountain Bottle Cage	|$20229.75|
-|Long-Sleeve Logo Jersey, S	|$21445.71|
-|LL Mountain Tire	|$21541.38|
-|Short-Sleeve Classic Jersey, M|$21973.93|
-|LL Road Tire	|$22435.56|
-|ML Road Tire	|$23140.74|
+|Touring Tire Tube	|$7,425.12|
+|Road Tire Tube	|$9,480.24|
+|Road Bottle Cage	|$15,390.88|
+|Mountain Tire Tube	|$15,444.05|
+|Mountain Bottle Cage	|$20,229.75|
+|Long-Sleeve Logo Jersey, S	|$21,445.71|
+|LL Mountain Tire	|$21,541.38|
+|Short-Sleeve Classic Jersey, M|$21,973.93|
+|LL Road Tire	|$22,435.56|
+|ML Road Tire	|$23,140.74|
+
+### 7. What is Revenue by Sales Representative?
+
+**The query:**
+
+```sql
+SELECT
+	CONCAT(A.FirstName,' ',A.LastName) AS FullName
+	,A.EmailAddress
+	,C.SalesTerritoryCountry
+	,SUM(B.SalesAmount) AS Revenue
+FROM 
+	[dbo].[DimEmployee] A
+	LEFT JOIN [dbo].[FactResellerSales] B
+		ON A.EmployeeKey=B.EmployeeKey
+	LEFT JOIN [dbo].[DimSalesTerritory] C
+		ON B.SalesTerritoryKey=C.SalesTerritoryKey
+WHERE 
+	Title LIKE 'Sales Representative'
+GROUP BY 
+	CONCAT(A.FirstName,' ',A.LastName)
+	,A.EmailAddress
+	,C.SalesTerritoryCountry
+ORDER BY 
+	Revenue DESC
+	,FullName
+```
+
+**The Result Set:**
+|FullName|EmailAddress|Country|Revenue|
+|-------|-------|-------|-------|
+|Linda Mitchell|	linda3@adventure-works.com|	United States|	$10,367,007.4286|
+|Jillian Carson|	jillian0@adventure-works.com|	United States|	$10,065,803.5429|
+|Michael Blythe|	michael9@adventure-works.com|	United States|	$9,293,903.0055|
+|Jae Pak|	jae0@adventure-works.com|	Canada|	$8,503,338.6472|
+|Tsvi Reiter|	tsvi0@adventure-works.com|	United States|	$7,171,012.7514|
+|Shu Ito	|shu0@adventure-works.com|	United States|	$6,427,005.5556|
+|Ranjit Varkey Chudukatil|	ranjit0@adventure-works.com	France|	$4,509,888.933|
+|José Saraiva|	josé1@adventure-works.com|	United Kingdom|	$3,837,927.1902|
+|David Campbell|	david8@adventure-works.com|	United States|	$3,729,945.3501|
+|Garrett Vargas|	garrett1@adventure-works.com|	Canada|	$3,609,447.2163|
+|Pamela Ansman-Wolfe|	pamela0@adventure-works.com|	United States|	$3,325,102.5952|
+|Tete Mensa-Annan|	tete0@adventure-works.com|	United States|	$2,312,545.6905|
+|José Saraiva|	josé1@adventure-works.com|	Canada|	$2,088,491.1672
+|Rachel Valdez|	rachel0@adventure-works.com|	Germany|	$1,790,640.2311|
+|Lynn Tsoflias|	lynn0@adventure-works.com|	Australia|	$1,421,810.9252|
