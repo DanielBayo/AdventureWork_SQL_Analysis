@@ -331,3 +331,129 @@ ORDER BY
 |José Saraiva|	josé1@adventure-works.com|	Canada|	$2,088,491.1672|
 |Rachel Valdez|	rachel0@adventure-works.com|	Germany|	$1,790,640.2311|
 |Lynn Tsoflias|	lynn0@adventure-works.com|	Australia|	$1,421,810.9252|
+
+
+### 8. What is the Internet Sales Revenue by Year_Month?
+
+**The query:**
+
+```sql
+SELECT 
+	[MonthNumberOfYear] AS MonthNo
+    ,[CalendarYear] AS Year_
+	,[EnglishMonthName] AS Month_
+    ,FORMAT(SUM([SalesAmount]),'$#,0.00') AS Revenue
+FROM 
+	[dbo].[FactInternetSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
+```
+
+**The Result Set:**
+|MonthNo|Year|MonthName|Revenue|
+|-------|-------|-------|-------|
+|1|	2014	|January	|$45,694.72|
+|12	|2013	|December	|$1,874,360.29|
+|11	|2013	|November	|$1,780,920.06|
+|10	|2013	|October	|$1,673,293.41|
+|9	|2013	|September	|$1,447,495.69|
+|8	|2013	|August	|$1,551,065.56|
+|7	|2013	|July	|$1,371,675.81|
+|6	|2013	|June	|$1,643,177.78|
+|5	|2013	|May	|$1,284,592.93|
+|4	|2013	|April	|$1,046,022.77|
+|3	|2013	|March	|$1,049,907.39|
+|2	|2013	|February	|$771,348.74|
+|1	|2013	|January	|$857,689.91|
+|12	|2012	|December	|$624,502.17|
+|11	|2012	|November	|$537,955.52|
+|10	|2012	|October	|$535,159.48|
+|9	|2012	|September	|$486,177.45|
+|8	|2012	|August	|$523,917.38|
+|7	|2012	|July	|$444,558.23|
+|6	|2012	|June	|$555,160.14|
+|5	|2012	|May	|$358,877.89|
+|4	|2012	|April	|$400,335.61|
+|3	|2012	|March	|$373,483.01|
+|2	|2012	|February	|$506,994.19|
+|1	|2012	|January	|$495,364.13|
+|12	|2011	|December	|$669,431.50|
+|11	|2011	|November	|$660,545.81|
+|10	|2011	|October	|$708,208.00|
+|9	|2011	|September	|$603,083.50|
+|8	|2011	|August	|$614,557.94|
+|7	|2011	|July	|$596,746.56|
+|6	|2011	|June	|$737,839.82|
+|5	|2011	|May	|$561,681.48|
+|4	|2011	|April	|$502,073.85|
+|3	|2011	|March	|$485,198.66|
+|2	|2011	|February	|$466,334.90|
+|1	|2011	|January	|$469,823.91|
+|12	|2010	|December	|$43,421.04|
+
+### 9. What is the Reseller Sales Revenue by Year_Month?
+
+**The query:**
+
+```sql
+SELECT 
+	[MonthNumberOfYear] AS MonthNo
+    ,[CalendarYear] AS Year_
+	,[EnglishMonthName] AS Month_
+    ,FORMAT(SUM([SalesAmount]),'$#,0.00') AS Revenue
+FROM 
+	[dbo].[FactResellerSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
+```
+
+**The Result Set:**
+|MonthNo|Year|MonthName|Revenue|
+|-------|-------|-------|-------|
+|11|	2013	|November	|$3,416,234.85|
+|10	|2013	|October	|$3,314,600.78|
+|9|2013	|September	|$2,206,725.22|
+|8|2013	|August	|$2,738,653.62|
+|7	|2013	|July	|$2,699,300.79|
+|6	|2013	|June|$1,662,547.32|
+|5	|2013	|May|$3,510,948.73|
+|4	|2013	|April|$3,483,161.40|
+|3	|2013	|March	|$2,282,115.88|
+|2	|2013	|Febraury	|$4,047,574.04|
+|1	|2013	|January	|$4,212,971.51|
+|12	|2012	|December	|$2,665,650.54|
+|11	|2012	|November	|$1,987,872.71|
+|10|2012	|October	|$2,880,752.68|
+|9	|2012	|September	|$1,865,278.43|
+|8	|2012	|August	|$1,563,955.08|
+|7	|2012	|July	|$2,384,846.59|
+|6	|2012	|June	|$1,317,541.83|
+|5	|2012	|May|$2,185,213.21|
+|4|2012	|April|$3,053,816.33|
+|3|2012	|March|$1,802,154.21|
+|2	|2012	|February	|$2,885,359.20|
+|1	|2012	|January	|$3,601,190.71|
+|12	|2011	|December	|$1,001,803.77|
+|11	|2011	|November	|$2,269,116.71|
+|10|2011	|October	|$882,899.94|
+|9	|2011	|September	|$3,356,069.34|
+|8	|2011	|August	|$713,116.69|
+|7	|2011	|July	|$4,027,080.34|
+|5	|2011	|May	|$2,010,618.07|
+|4	|2011	|April	|$1,538,408.31|
+|3	|2011	|March	|$489,328.58|
+
