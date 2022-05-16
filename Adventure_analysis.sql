@@ -198,12 +198,10 @@ ORDER BY
 SELECT [CalendarYear] AS [Year] 
        ,[MonthNumberOfYear] AS [Month] 
        ,FORMAT(SUM([SalesAmount]), '$#,0.00') AS Revenue 
-       ,CONCAT(100*(SUM([SalesAmount])-LAG(SUM([SalesAmount]), 1, 0) OVER(
-                                                                  ORDER BY [CalendarYear]
-																  ,[MonthNumberOfYear] ASC)
-																  )/LAG(SUM([SalesAmount]), 1) OVER(
-                                                                                                   ORDER BY [CalendarYear]
-																								   ,[MonthNumberOfYear] ASC),'%') AS [MoM Growth]
+       ,CONCAT(
+		   100*(SUM([SalesAmount])-LAG(SUM([SalesAmount]), 1, 0) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC))/LAG(SUM([SalesAmount]), 1) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC)
+		   ,'%'
+		) AS [MoM Growth]
 FROM [dbo].[FactInternetSales] A
 LEFT JOIN [dbo].[DimDate] B ON A.OrderDateKey=B.DateKey
 GROUP BY [CalendarYear] ,
