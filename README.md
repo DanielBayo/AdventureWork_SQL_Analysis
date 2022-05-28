@@ -250,7 +250,7 @@ ORDER BY
 
 <img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q6.png" alt="Top 10 Product by revenue" width="500"/>
 
-### 6. What are the Bottom 10 Product by Revenue?
+### 7. What are the Bottom 10 Product by Revenue?
 
 **The query:**
 
@@ -286,7 +286,11 @@ ORDER BY
 |LL Road Tire	|$22,435.56|
 |ML Road Tire	|$23,140.74|
 
-### 7. What is Revenue by Sales Representative?
+**The Visual:**
+
+<img src="https://github.com/DanielBayo/AdventureWork_SQL_Analysis/blob/main/Q7.png" alt="Bottom 10 Product by revenue" width="500"/>
+
+### 8. What is Revenue by Sales Representative?
 
 **The query:**
 
@@ -333,7 +337,7 @@ ORDER BY
 |Lynn Tsoflias|	lynn0@adventure-works.com|	Australia|	$1,421,810.9252|
 
 
-### 8. What is the Internet Sales Revenue by Year_Month?
+### 9. What is the Internet Sales Revenue by Year_Month?
 
 **The query:**
 
@@ -398,7 +402,7 @@ ORDER BY
 |1	|2011	|January	|$469,823.91|
 |12	|2010	|December	|$43,421.04|
 
-### 9. What is the Reseller Sales Revenue by Year_Month?
+### 10. What is the Reseller Sales Revenue by Year_Month?
 
 **The query:**
 
@@ -457,7 +461,7 @@ ORDER BY
 |4	|2011	|April		|$1,538,408.31|
 |3	|2011	|March		|$489,328.58|
 
-### 10. What is the Month over Month Growth for Internet sales since the beginning of the Business?
+### 11. What is the Month over Month Growth for Internet sales since the beginning of the Business?
 
 **The query:**
 
@@ -519,7 +523,7 @@ ORDER BY [Year] DESC,
 |2011|	1	|$469,823.91|	982.02%|
 |2010|	12	|$43,421.04	|          |
 
-### 11. What is the Month over Month Growth for Reseller sales since the beginning of the Business?
+### 12. What is the Month over Month Growth for Reseller sales since the beginning of the Business?
 
 **The query:**
 
@@ -577,7 +581,7 @@ ORDER BY [Year] DESC,
 | 2010 | 12    | $489,328.58     | %          |
 
 
-### 12. What is the Monthly Active Customers for Internet Sales ?
+### 13. What is the Monthly Active Customers for Internet Sales ?
 
 **The query:**
 
@@ -642,7 +646,7 @@ ORDER BY
 | 1                 | 2011 | January   | 144           |
 | 12                | 2010 | December  | 14            |
 
-### 13. What is the Monthly Active Reseller for Reseller Sales ?
+### 14. What is the Monthly Active Reseller for Reseller Sales ?
 
 **The query:**
 
