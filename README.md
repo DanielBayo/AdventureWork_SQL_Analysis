@@ -457,7 +457,7 @@ ORDER BY
 |4	|2011	|April		|$1,538,408.31|
 |3	|2011	|March		|$489,328.58|
 
-### 9. What is the Month over Month Growth since the beginning of the Business?
+### 10. What is the Month over Month Growth for Internet sales since the beginning of the Business?
 
 **The query:**
 
@@ -518,3 +518,60 @@ ORDER BY [Year] DESC,
 |2011|	2	|$466,334.90|	-0.74%|
 |2011|	1	|$469,823.91|	982.02%|
 |2010|	12	|$43,421.04	|          |
+
+### 11. What is the Month over Month Growth for Reseller sales since the beginning of the Business?
+
+**The query:**
+
+```sql
+SELECT [CalendarYear] AS [Year] 
+       ,[MonthNumberOfYear] AS [Month] 
+       ,FORMAT(SUM([SalesAmount]), '$#,0.00') AS Revenue 
+       ,CONCAT(
+		   100*(SUM([SalesAmount])-LAG(SUM([SalesAmount]), 1, 0) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC))/LAG(SUM([SalesAmount]), 1) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC)
+		   ,'%'
+		) AS [MoM Growth]
+FROM [dbo].[FactResellerSales] A
+LEFT JOIN [dbo].[DimDate] B ON A.OrderDateKey=B.DateKey
+GROUP BY [CalendarYear] ,
+         [MonthNumberOfYear]
+ORDER BY [Year] DESC,
+         [Month] DESC;
+```
+
+**The Result Set:**
+| Year | Month | ResellerRevenue | MoM Growth |
+|------|-------|-----------------|------------|
+| 2013 | 11    | $3,416,234.85   | 3.07%      |
+| 2013 | 10    | $3,314,600.78   | 50.20%     |
+| 2013 | 9     | $2,206,725.22   | -19.42%    |
+| 2013 | 8     | $2,738,653.62   | 1.46%      |
+| 2013 | 7     | $2,699,300.79   | 62.36%     |
+| 2013 | 6     | $1,662,547.32   | -52.65%    |
+| 2013 | 5     | $3,510,948.73   | 0.80%      |
+| 2013 | 4     | $3,483,161.40   | 52.63%     |
+| 2013 | 3     | $2,282,115.88   | -43.62%    |
+| 2013 | 2     | $4,047,574.04   | -3.93%     |
+| 2013 | 1     | $4,212,971.51   | 58.05%     |
+| 2012 | 12    | $2,665,650.54   | 34.10%     |
+| 2012 | 11    | $1,987,872.71   | -30.99%    |
+| 2012 | 10    | $2,880,752.68   | 54.44%     |
+| 2012 | 9     | $1,865,278.43   | 19.27%     |
+| 2012 | 8     | $1,563,955.08   | -34.42%    |
+| 2012 | 7     | $2,384,846.59   | 81.01%     |
+| 2012 | 6     | $1,317,541.83   | -39.71%    |
+| 2012 | 5     | $2,185,213.21   | -28.44%    |
+| 2012 | 4     | $3,053,816.33   | 69.45%     |
+| 2012 | 3     | $1,802,154.21   | -37.54%    |
+| 2012 | 2     | $2,885,359.20   | -19.88%    |
+| 2012 | 1     | $3,601,190.71   | 50.45%     |
+| 2011 | 12    | $2,393,689.53   | 138.94%    |
+| 2011 | 11    | $1,001,803.77   | -55.85%    |
+| 2011 | 10    | $2,269,116.71   | 157.01%    |
+| 2011 | 9     | $882,899.94     | -73.69%    |
+| 2011 | 8     | $3,356,069.34   | 370.62%    |
+| 2011 | 7     | $713,116.69     | -82.29%    |
+| 2011 | 5     | $4,027,080.34   | 100.29%    |
+| 2011 | 3     | $2,010,618.07   | 30.69%     |
+| 2011 | 1     | $1,538,408.31   | 214.39%    |
+| 2010 | 12    | $489,328.58     | %          |

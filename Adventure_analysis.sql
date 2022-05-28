@@ -193,11 +193,11 @@ ORDER BY
 	[CalendarYear] DESC
 	,[MonthNumberOfYear] DESC;
 
---What is the Month over Month Growth?
+--What is the Month over Month Growth for Internet Sales?
 
 SELECT [CalendarYear] AS [Year] 
        ,[MonthNumberOfYear] AS [Month] 
-       ,FORMAT(SUM([SalesAmount]), '$#,0.00') AS Revenue 
+       ,FORMAT(SUM([SalesAmount]), '$#,0.00') AS InternetRevenue 
        ,CONCAT(
 		   100*(SUM([SalesAmount])-LAG(SUM([SalesAmount]), 1, 0) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC))/LAG(SUM([SalesAmount]), 1) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC)
 		   ,'%'
@@ -208,3 +208,55 @@ GROUP BY [CalendarYear] ,
          [MonthNumberOfYear]
 ORDER BY [Year] DESC,
          [Month] DESC;
+
+--What is the Month over Month Growth for Reseller Sales?
+
+SELECT [CalendarYear] AS [Year] 
+       ,[MonthNumberOfYear] AS [Month] 
+       ,FORMAT(SUM([SalesAmount]), '$#,0.00') AS ResellerRevenue 
+       ,CONCAT(
+		   100*(SUM([SalesAmount])-LAG(SUM([SalesAmount]), 1, 0) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC))/LAG(SUM([SalesAmount]), 1) OVER(ORDER BY [CalendarYear],[MonthNumberOfYear] ASC)
+		   ,'%'
+		) AS [MoM Growth]
+FROM [dbo].[FactResellerSales] A
+LEFT JOIN [dbo].[DimDate] B ON A.OrderDateKey=B.DateKey
+GROUP BY [CalendarYear] ,
+         [MonthNumberOfYear]
+ORDER BY [Year] DESC,
+         [Month] DESC;
+
+---What is the Monthly Active Customers for Internet Sales ?
+SELECT 
+	[MonthNumberOfYear]
+    ,[CalendarYear] AS Year
+	,[EnglishMonthName] AS Month
+    ,COUNT(DISTINCT[CustomerKey]) AS TotalCustomer
+FROM 
+	[dbo].[FactInternetSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
+
+---What is the Monthly Active Customers for Reseller Sales ?
+SELECT 
+	[MonthNumberOfYear]
+    ,[CalendarYear] AS Year
+	,[EnglishMonthName] AS Month
+    ,COUNT(DISTINCT[ResellerKey]) AS TotalReseller
+FROM 
+	[dbo].[FactResellerSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
