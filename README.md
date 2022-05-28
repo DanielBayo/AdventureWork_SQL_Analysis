@@ -575,3 +575,130 @@ ORDER BY [Year] DESC,
 | 2011 | 3     | $2,010,618.07   | 30.69%     |
 | 2011 | 1     | $1,538,408.31   | 214.39%    |
 | 2010 | 12    | $489,328.58     | %          |
+
+
+### 12. What is the Monthly Active Customers for Internet Sales ?
+
+**The query:**
+
+```sql
+SELECT 
+	[MonthNumberOfYear]
+    ,[CalendarYear] AS Year
+	,[EnglishMonthName] AS Month
+    ,COUNT(DISTINCT[CustomerKey]) AS TotalCustomer
+FROM 
+	[dbo].[FactInternetSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
+```
+
+**The Result Set:**
+| MonthNumberOfYear | Year | Month     | TotalCustomer |
+|-------------------|------|-----------|---------------|
+| 1                 | 2014 | January   | 834           |
+| 12                | 2013 | December  | 2133          |
+| 11                | 2013 | November  | 2036          |
+| 10                | 2013 | October   | 2073          |
+| 9                 | 2013 | September | 1832          |
+| 8                 | 2013 | August    | 1900          |
+| 7                 | 2013 | July      | 1796          |
+| 6                 | 2013 | June      | 1948          |
+| 5                 | 2013 | May       | 1719          |
+| 4                 | 2013 | April     | 1564          |
+| 3                 | 2013 | March     | 1631          |
+| 2                 | 2013 | February  | 1373          |
+| 1                 | 2013 | January   | 627           |
+| 12                | 2012 | December  | 354           |
+| 11                | 2012 | November  | 324           |
+| 10                | 2012 | October   | 313           |
+| 9                 | 2012 | September | 269           |
+| 8                 | 2012 | August    | 294           |
+| 7                 | 2012 | July      | 246           |
+| 6                 | 2012 | June      | 318           |
+| 5                 | 2012 | May       | 207           |
+| 4                 | 2012 | April     | 219           |
+| 3                 | 2012 | March     | 212           |
+| 2                 | 2012 | February  | 260           |
+| 1                 | 2012 | January   | 252           |
+| 12                | 2011 | December  | 222           |
+| 11                | 2011 | November  | 208           |
+| 10                | 2011 | October   | 221           |
+| 9                 | 2011 | September | 185           |
+| 8                 | 2011 | August    | 193           |
+| 7                 | 2011 | July      | 188           |
+| 6                 | 2011 | June      | 230           |
+| 5                 | 2011 | May       | 174           |
+| 4                 | 2011 | April     | 157           |
+| 3                 | 2011 | March     | 150           |
+| 2                 | 2011 | February  | 144           |
+| 1                 | 2011 | January   | 144           |
+| 12                | 2010 | December  | 14            |
+
+### 13. What is the Monthly Active Reseller for Reseller Sales ?
+
+**The query:**
+
+```sql
+SELECT 
+	SELECT 
+	[MonthNumberOfYear]
+    ,[CalendarYear] AS Year
+	,[EnglishMonthName] AS Month
+    ,COUNT(DISTINCT[ResellerKey]) AS TotalReseller
+FROM 
+	[dbo].[FactResellerSales] A
+	LEFT JOIN [dbo].[DimDate] B
+		ON A.OrderDateKey=B.DateKey
+GROUP BY 
+	[MonthNumberOfYear]
+	,[CalendarYear]
+	,[EnglishMonthName]
+ORDER BY
+	[CalendarYear] DESC
+	,[MonthNumberOfYear] DESC;
+```
+
+**The Result Set:**
+| MonthNumberOfYear | Year | Month     | TotalReseller |
+|-------------------|------|-----------|---------------|
+| 11                | 2013 | November  | 179           |
+| 10                | 2013 | October   | 178           |
+| 9                 | 2013 | September | 91            |
+| 8                 | 2013 | August    | 173           |
+| 7                 | 2013 | July      | 174           |
+| 6                 | 2013 | June      | 93            |
+| 5                 | 2013 | May       | 174           |
+| 4                 | 2013 | April     | 177           |
+| 3                 | 2013 | March     | 96            |
+| 2                 | 2013 | February  | 174           |
+| 1                 | 2013 | January   | 183           |
+| 12                | 2012 | December  | 93            |
+| 11                | 2012 | November  | 102           |
+| 10                | 2012 | October   | 134           |
+| 9                 | 2012 | September | 74            |
+| 8                 | 2012 | August    | 106           |
+| 7                 | 2012 | July      | 132           |
+| 6                 | 2012 | June      | 65            |
+| 5                 | 2012 | May       | 114           |
+| 4                 | 2012 | April     | 133           |
+| 3                 | 2012 | March     | 73            |
+| 2                 | 2012 | February  | 111           |
+| 1                 | 2012 | January   | 139           |
+| 12                | 2011 | December  | 72            |
+| 11                | 2011 | November  | 68            |
+| 10                | 2011 | October   | 85            |
+| 9                 | 2011 | September | 37            |
+| 8                 | 2011 | August    | 143           |
+| 7                 | 2011 | July      | 40            |
+| 5                 | 2011 | May       | 153           |
+| 3                 | 2011 | March     | 100           |
+| 1                 | 2011 | January   | 75            |
+| 12                | 2010 | December  | 38            |
